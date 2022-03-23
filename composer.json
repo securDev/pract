@@ -1,0 +1,13 @@
+{
+    "name": "danil/pract",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "securDev",
+            "email": "danilatarabanov1@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
