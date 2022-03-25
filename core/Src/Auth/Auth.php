@@ -51,11 +51,11 @@ class Auth
        return false;
    }
 
-    //Выход текущего пользователя
-    public static function logout(): bool
-    {
-        Session::clear('id');
-        return true;
-    }
+   //Выход текущего пользователя
+   public static function logout(): bool
+   {
+       Session::clear('id');
+       return true;
+   }
 
 }

@@ -16,7 +16,6 @@ class Site
       return (new View())->render('site.post', ['posts' => $posts]);
    }
 
-
    public function hello(): string
    {
        return new View('site.hello', ['message' => 'hello working']);
@@ -52,4 +51,3 @@ class Site
 
 
 }
-
