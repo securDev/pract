@@ -21,6 +21,26 @@ class Site
        return new View('site.hello', ['message' => 'hello working']);
    }
 
+    public function aboutAbonent(): string
+    {
+        return new View('site.aboutAbonent', ['message' => 'hello working']);
+    }
+
+    public function countAbonent(): string
+    {
+//         $count = Abonent::countAbonent();
+        return new View('site.countAbonent', ['message' => 2222]);
+    }
+
+   public function addSubvision(): string
+   {
+        return new View('site.addSubvision', []);
+   }
+
+    public function addRoom(): string
+    {
+        return new View('site.addRoom', []);
+    }
    public function signup(Request $request): string
    {
       if ($request->method === 'POST' && User::create($request->all())) {
