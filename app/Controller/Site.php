@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Model\Post;
+use Model\Abonent;
 use Model\Room;
 use Model\Subvision;
 use Src\View;
@@ -23,10 +24,7 @@ class Site
        return new View('site.hello', ['message' => 'hello working']);
    }
 
-    public function aboutAbonent(): string
-    {
-        return new View('site.aboutAbonent', ['message' => 'hello working']);
-    }
+    
 
     public function countAbonent(): string
     {
@@ -44,7 +42,17 @@ class Site
 
 
 
+    public function aboutAbonent(Request $request): string
+    {
+        // if ($request->method === Post::where('surname', $request->surname)->get()) 
+        // {
+        //   app()->route->redirect('/go');
+        // }
 
+        $abonents = Abonent::all();
+        return (new View())->render('site.aboutAbonent', ['abonents' => $abonents]);
+    
+    }
 
 
    public function addSubvision(Request $request): string
