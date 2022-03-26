@@ -3,6 +3,8 @@
 namespace Controller;
 
 use Model\Post;
+use Model\Room;
+use Model\Subvision;
 use Src\View;
 use Src\Request;
 use Model\User;
@@ -32,20 +34,45 @@ class Site
         return new View('site.countAbonent', ['message' => 2222]);
     }
 
-   public function addSubvision(): string
-   {
-        return new View('site.addSubvision', []);
-   }
 
-    public function addRoom(): string
+
+
+
+
+
+
+
+
+
+
+
+
+   public function addSubvision(Request $request): string
     {
-        return new View('site.addRoom', []);
+        if ($request->method === 'POST' && Subvision::create($request->all())) {
+          app()->route->redirect('/go');
+      }
+
+      return new View('site.addSubvision');
     }
+
+
+    public function addRoom(Request $request): string
+    {
+        if ($request->method === 'POST' && Room::create($request->all())) {
+          app()->route->redirect('/go');
+      }
+
+      return new View('site.addRoom');
+    }
+
+
    public function signup(Request $request): string
    {
       if ($request->method === 'POST' && User::create($request->all())) {
           app()->route->redirect('/go');
       }
+
       return new View('site.signup');
    }
 
