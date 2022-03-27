@@ -1,9 +1,13 @@
-<h1>addSubvision</h1>
 
+<div class="e">
+<?php include "hello.php" ?>
 
-<h3><?= $message ?? ''; ?></h3>
-<form method="post">
-   <label><input type="text" name="subvision"></label>
+<div class="form-block">
+   <form class="form" method="post">
+      <label><input class="input" type="text" name="subvision" placeholder="Имя подразделения"></label>
+      <label><input class="input" type="text" name="type" placeholder="Тип подразделения"></label>
 
-   <button>add subvision</button>
-</form>
+      <button>Добавить</button>
+   </form>
+</div>
+</div>

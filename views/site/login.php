@@ -1,9 +1,9 @@
 
 
 
-<div class="block-head">
-    <h2 class="center-head">Auth</h2>
-</div>
+<!-- <div>
+    <h2 >Auth</h2>
+</div> -->
 
 
 
@@ -17,12 +17,13 @@
 <?php
 if (!app()->auth::check()):
    ?>
-   <h2 class="center-head">Login</h2>
-   <form style="display: flex; flex-direction: column;" class="form-login" method="post">
-       <label class="input"><input type="text" name="login"></label>
-       <label class="input"><input type="password" name="password"></label>
-       <button>Войти</button>
-   </form>
-
+    <div class="form-block">
+       <h2 class="form-head">Login</h2>
+       <form class="form" method="post">
+           <label><input class="input" type="text" name="login"></label>
+           <label><input class="input" type="password" name="password"></label>
+           <button>Войти</button>
+       </form>
+    </div>
    <h3><?= $message ?? ''; ?></h3>
 <?php endif;
