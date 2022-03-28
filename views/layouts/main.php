@@ -53,6 +53,7 @@
       }
       .form-block {
          margin-top: 100px;
+         margin-left: 200px;
          display: flex;
          align-items: center;
          justify-content: center;
@@ -82,13 +83,34 @@
          cursor: pointer;
          background-color: rgba(127, 106, 255, 1);
       }
+      .auth-but {
+         display: flex; 
+         align-items: center;
+         justify-content: space-between;
+      }
+      .auth-but a {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         text-decoration: none;
+         color: black;
+         border: 1px solid black;
+         border-radius: 25px;
+         height: 30px;
+         width: 120px;
+         background-color: rgb(239, 239, 239);
+         margin: 20px;
+      }
+      .auth-but a:hover {
+         background-color: rgba(127, 106, 255, 1);
+      }
       .action {
          width: 200px;
          display: flex;
          flex-direction: column;
          margin-left: 80px;
          margin-top: 80px;
-         margin-right: 300px;
+         margin-right: 100px;
       }
       .action a {
          margin: 12px 0 12px 0;
@@ -117,6 +139,28 @@
       }
       .a-f nav {
          margin-right: 0;
+      }
+      .header-ab-block {
+         display: flex;
+         width: 860px;
+         justify-content: space-between;
+         margin: 0 30px 0 30px;
+         align-items: center;
+      }
+      .header-ab-block input {
+         width: 150px;
+         height: 25px;
+      }
+      .line-ab {
+         border: 1px solid black;
+         width: 900px;
+      }
+      .list-item {
+         display: flex;
+         margin: 30px 0 0 30px;
+      }
+      .list-item h4 {
+         width: 150px;
       }
    </style>
 <header>

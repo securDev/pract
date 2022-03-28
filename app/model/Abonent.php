@@ -11,10 +11,14 @@ class Abonent extends Model
    use HasFactory;
 
    public $timestamps = false;
-   protected $fillable = [
-       'search'
-   ];
 
+   
+   public static function arrAbonents($credentials)
+   {
+        return self::where(['room' => $credentials['room'],
+           'subvision' => $credentials['subvision'],]);
+   }
+   
    //Выборка пользователя по первичному ключу
    public function findIdentity(int $id)
    {

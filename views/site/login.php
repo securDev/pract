@@ -1,18 +1,4 @@
 
-
-
-<!-- <div>
-    <h2 >Auth</h2>
-</div> -->
-
-
-
-
-
-
-
-
-
 <h3><?= app()->auth->user()->name ?? ''; ?></h3>
 <?php
 if (!app()->auth::check()):
@@ -22,7 +8,10 @@ if (!app()->auth::check()):
        <form class="form" method="post">
            <label><input class="input" type="text" name="login"></label>
            <label><input class="input" type="password" name="password"></label>
-           <button>Войти</button>
+           <div class="auth-but">
+              <a href="#">Регистрация</a>
+              <button>Войти</button>
+           </div>
        </form>
     </div>
    <h3><?= $message ?? ''; ?></h3>

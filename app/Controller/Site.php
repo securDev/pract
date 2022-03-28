@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Model\Post;
+use Model\CountAbonent;
 use Model\Abonent;
 use Model\Room;
 use Model\Subvision;
@@ -21,15 +22,19 @@ class Site
 
    public function hello(): string
    {
-       return new View('site.hello', ['message' => 'hello working']);
+       return new View('site.hello', ['message' => 'Выберите действие']);
    }
 
     
 
-    public function countAbonent(): string
-    {
-//         $count = Abonent::countAbonent();
-        return new View('site.countAbonent', ['message' => 2222]);
+    public function countAbonent(Request $request): string
+    {   
+        if ($request->method === 'POST')
+        {
+            $count = count(Abonent::where('room', $request->room)->where('subvision', $request->subvision)->get());
+            return (new View)->render('site.countAbonent', ['message' => "Подсчитать количество абонентов", 'count' => $count]);
+        }
+        return (new View)->render('site.countAbonent', ['message' => "Подсчитать количество абонентов"]);
     }
 
 
@@ -50,7 +55,7 @@ class Site
         // }
 
         $abonents = Abonent::all();
-        return (new View())->render('site.aboutAbonent', ['abonents' => $abonents]);
+        return (new View())->render('site.aboutAbonent', ['abonents' => $abonents, "message" => "Информация об абонентах"]);
     
     }
 
@@ -61,7 +66,7 @@ class Site
           app()->route->redirect('/go');
       }
 
-      return new View('site.addSubvision');
+      return new View('site.addSubvision', ["message" => "Добавить подразделение"]);
     }
 
 
@@ -71,7 +76,7 @@ class Site
           app()->route->redirect('/go');
       }
 
-      return new View('site.addRoom');
+      return new View('site.addRoom', ["message" => "Добавить комнату"]);
     }
 
 
