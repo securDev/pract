@@ -63,6 +63,9 @@
          display: flex;
          flex-direction: column;
       }
+      .form select {
+         width: 232px;
+      }
       .input {
          margin: 20px;
          height: 35px;
@@ -161,6 +164,9 @@
       }
       .list-item h4 {
          width: 150px;
+      }
+      ol {
+         margin-bottom: 50px;
       }
    </style>
 <header>

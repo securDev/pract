@@ -12,7 +12,9 @@ class Room extends Model
 
    public $timestamps = false;
    protected $fillable = [
-       'qwe'
+       'name',
+       'type',
+       'subvision'
    ];
 
    //Выборка пользователя по первичному ключу

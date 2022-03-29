@@ -7,6 +7,8 @@ use Model\CountAbonent;
 use Model\Abonent;
 use Model\Room;
 use Model\Subvision;
+use Model\TypeSubvision;
+use Model\TypeRoom;
 use Src\View;
 use Src\Request;
 use Model\User;
@@ -38,10 +40,7 @@ class Site
     }
 
 
-
-
-
-
+    
 
 
 
@@ -49,10 +48,12 @@ class Site
 
     public function aboutAbonent(Request $request): string
     {
-        // if ($request->method === Post::where('surname', $request->surname)->get()) 
-        // {
-        //   app()->route->redirect('/go');
-        // }
+        if ($request->method === 'POST')
+        {
+            $abonents = Abonent::where('surname', $request->search)->get();
+            return (new View())->render('site.aboutAbonent', ['message' => "Информация об абонентах", 'abonents' => $abonents]);
+
+        }
 
         $abonents = Abonent::all();
         return (new View())->render('site.aboutAbonent', ['abonents' => $abonents, "message" => "Информация об абонентах"]);
@@ -60,24 +61,64 @@ class Site
     }
 
 
+
+
+
+
+
+
+
+
+
+
    public function addSubvision(Request $request): string
     {
-        if ($request->method === 'POST' && Subvision::create($request->all())) {
+        if ($request->method === 'POST' && Subvision::create($request->all())) 
+        {
           app()->route->redirect('/go');
-      }
-
-      return new View('site.addSubvision', ["message" => "Добавить подразделение"]);
+        }
+        $subvisions = TypeSubvision::getSubvision();
+      return (new View)->render('site.addSubvision', ["message" => "Добавить подразделение", 'subvisions' => $subvisions]);
     }
+
+
+
+
+
+
+
+
+
+
 
 
     public function addRoom(Request $request): string
     {
-        if ($request->method === 'POST' && Room::create($request->all())) {
+        if ($request->method === 'POST' && Room::create($request->all())) 
+        {
           app()->route->redirect('/go');
-      }
-
-      return new View('site.addRoom', ["message" => "Добавить комнату"]);
+        }
+        $subvisions = TypeSubvision::getSubvision();
+        $rooms = TypeRoom::getRoom();
+      return (new View)->render('site.addRoom', ["message" => "Добавить комнату", 'rooms' => $rooms,'subvisions' => $subvisions]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
    public function signup(Request $request): string
