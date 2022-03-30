@@ -25,6 +25,14 @@ class Auth
        Session::set('id', self::$user->getId());
    }
 
+   public static function generateCSRF(): string
+    {
+       $token = md5(time());
+       Session::set('csrf_token', $token);
+       return $token;
+    }
+
+
    //Аутентификация пользователя и вход по учетным данным
    public static function attempt(array $credentials): bool
    {

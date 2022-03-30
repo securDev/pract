@@ -14,8 +14,13 @@ use Src\Request;
 use Model\User;
 use Src\Auth\Auth;
 
+use Src\Validator\Validator;
+
 class Site
 {
+
+
+    private $error = '';
    public function index(Request $request): string
    {
       $posts = Post::where('id', $request->id)->get();
@@ -73,12 +78,34 @@ class Site
 
    public function addSubvision(Request $request): string
     {
-        if ($request->method === 'POST' && Subvision::create($request->all())) 
-        {
-          app()->route->redirect('/go');
+        if ($request->method === 'POST') 
+        {   
+          $validator = new Validator($request->all(), 
+            [
+               'name' => ['required']
+            ], 
+            [
+               'required' => 'Поле :field пусто'
+            ]);
+
+           if($validator->fails()){
+               return new View('site.addSubvision',
+                   ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+           }
+
+           if (Subvision::create($request->all())) 
+           {
+           app()->route->redirect('/hello');
+           }
+
+
         }
+
+
         $subvisions = TypeSubvision::getSubvision();
+
       return (new View)->render('site.addSubvision', ["message" => "Добавить подразделение", 'subvisions' => $subvisions]);
+
     }
 
 
@@ -94,31 +121,30 @@ class Site
 
     public function addRoom(Request $request): string
     {
-        if ($request->method === 'POST' && Room::create($request->all())) 
-        {
-          app()->route->redirect('/go');
+        if ($request->method === 'POST') 
+        {   
+          $validator = new Validator($request->all(), [
+               'name' => ['required']
+           ], [
+               'required' => 'Поле :field пусто'
+           ]);
+
+           if($validator->fails()){
+               return new View('site.addRoom',
+                   ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+           }
+
+           if (Room::create($request->all())) 
+           {
+           app()->route->redirect('/hello');
+           }
+
+          app()->route->redirect('/hello');
         }
         $subvisions = TypeSubvision::getSubvision();
         $rooms = TypeRoom::getRoom();
       return (new View)->render('site.addRoom', ["message" => "Добавить комнату", 'rooms' => $rooms,'subvisions' => $subvisions]);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
    public function signup(Request $request): string
@@ -132,16 +158,30 @@ class Site
 
     public function login(Request $request): string
     {
-       //Если просто обращение к странице, то отобразить форму
-       if ($request->method === 'GET') {
-           return new View('site.login');
-       }
-       //Если удалось аутентифицировать пользователя, то редирект
-       if (Auth::attempt($request->all())) {
+       if ($request->method === 'POST') {
+
+           $validator = new Validator($request->all(), [
+               'login' => ['required', 'unique:login'],
+               'password' => ['required']
+           ], [
+               'required' => 'Поле :field пусто',
+               'unique' => 'Поле :field должно быть уникально'
+           ]);
+
+           if($validator->fails()){
+               return new View('site.login',
+                   ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+           }
+
+           if (Auth::attempt($request->all())) 
+           {
            app()->route->redirect('/hello');
+           }
+           else{
+            $this->error = "Пароль или логин не верен";
+           }
        }
-       //Если аутентификация не удалась, то сообщение об ошибке
-       return new View('site.login', ['message' => 'Неправильные логин или пароль']);
+       return new View('site.login', ['error' => $this->error]);
     }
 
     public function logout(): void

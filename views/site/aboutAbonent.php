@@ -4,6 +4,8 @@
    <div class="header-ab-block">
       <h1>Abonents</h1>
       <form method="post">
+         <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+
          <input class="input" type="text" name="search" placeholder="Search">
          <button>  Search</button>
       </form>

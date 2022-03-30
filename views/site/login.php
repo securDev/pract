@@ -3,9 +3,11 @@
 <?php
 if (!app()->auth::check()):
    ?>
+    <h3><?= $error ?? ''; ?></h3>
     <div class="form-block">
        <h2 class="form-head">Login</h2>
        <form class="form" method="post">
+           <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
            <label><input class="input" type="text" name="login"></label>
            <label><input class="input" type="password" name="password"></label>
            <div class="auth-but">
@@ -15,4 +17,5 @@ if (!app()->auth::check()):
        </form>
     </div>
    <h3><?= $message ?? ''; ?></h3>
+
 <?php endif;

@@ -7,6 +7,7 @@
 <div class="form-block">
    <form class="form" method="post">
       <label><input class="input" type="text" name="name" placeholder="Имя комнаты"></label>
+      <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
 
          <select name="type" class="input" required="required">
             <option class="input" value="">Тип подразделения</option>'

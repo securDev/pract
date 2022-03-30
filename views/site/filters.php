@@ -4,6 +4,7 @@
     <?php if (app()->auth::check()): ?>
 
 		<form class="form" method="post">
+           <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
 
 			<select name="room"  class="input" required="required">
 
